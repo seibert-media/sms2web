@@ -61,6 +61,11 @@ header a {
   color: #666;
   margin: .3em 0 0 1em;
   font-size: .9em;
+  /* prevent accidental copying of time */
+  -ms-user-select: None;
+  -moz-user-select: None;
+  -webkit-user-select: None;
+  user-select: None;
 }
 .sms .date {
   font-weight: bold;
