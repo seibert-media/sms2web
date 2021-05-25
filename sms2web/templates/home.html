@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% if layout -%}
+<html>
+  <head>
+    <title>SMS2WEB</title>
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='icon.svg') }}">
+    <link rel=stylesheet href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </head>
+  <body>
+    <header>
+      <a class=company href="https://seibert-media.net"><img src="{{ url_for('static', filename='logo.svg') }}" alt="//SEIBERT/MEDIA"></a>
+      <h1 class=logo><a href="{{ url_for('home') }}">SMS2WEB <img src="{{ url_for('static', filename='icon.svg') }}" alt="//SEIBERT/MEDIA"></a></h1>
+    </header>
+    <main>
+{% endif -%}
+      <ul class=sms_list>
+        <li class=empty>nothing to see here</li>
+{% for sms in sms_list: -%}
+        <li class=sms data-id="{{ sms['id'] }}" title="sender: {{ sms['sender'] }}">
+          <div class=message>{{ sms['message'] }}</div>
+          <div class=meta>
+            <span class=date data-timestamp="{{ sms['timestamp'] }}">
+              {{ datetime.utcfromtimestamp(sms['timestamp']).strftime('%Y-%m-%d %H:%M:%S %Z') }}
+            </span>
+            ago
+          </div>
+          <div class=clear></div>
+        </li>
+{% endfor -%}
+      </ul>
+{% if layout -%}
+    </main>
+    <footer>
+      <ul>
+        <li><a class=notify href="#">notify</a></li>
+{% if help_url -%}
+        <li><a class=help href="{{ help_url }}" target="_blank">help</a></li>
+{% endif -%}
+{% if numbers -%}
+        <li><a class=numbers href="tel:{{ numbers.split(',')[0].replace(' ', '') }}" title="{{ ', '.join(numbers.split(',')) }}">{{ numbers.split(',')[0] }}</a></li>
+{% endif -%}
+{% if page > 0 %}
+        <li><a class=newer href="{{ url_for('home', page=page-1, per_page=per_page) }}">newer</a></li>
+{% endif %}
+{% if page < last_page %}
+        <li><a class=older href="{{ url_for('home', page=page+1, per_page=per_page) }}">older</a></li>
+{% endif %}
+        <li><a class=logout href="{{ url_for('google_auth.logout') }}">logout {{ user['name'] }}<img class=avatar src="{{ user['picture'] }}"></a></li>
+      </ul>
+    </footer>
+  </body>
+</html>
+{% endif -%}

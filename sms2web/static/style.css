@@ -1,0 +1,163 @@
+html {
+  font-size: 18px;
+}
+body {
+  font-family: sans-serif;
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+  background-color: #e0e0e0;
+}
+a:link, a:visited {
+    color: #000000;
+}
+
+
+header {
+  position: relative;
+  margin: 1rem 0;
+}
+header h1 {
+  font-size: 2rem;
+  line-height: 2rem;
+  white-space: nowrap;
+  display: inline-block;
+  margin: 0;
+}
+header h1 img {
+  height: 2.5rem;
+  vertical-align: super;
+}
+header .company {
+  display: inline-block;
+  float: right;
+  margin-top: 1.8rem;
+}
+header .company img {
+  height: 1.4rem;
+}
+header a {
+  text-decoration: none;
+}
+
+.sms_list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.sms {
+  background: white;
+  margin: .6em 0;
+  padding: .8em 1em .4em;
+  border-radius: .4em;
+  box-shadow: 0 .2em .2em rgba(0,0,0,.1)
+}
+.sms .message {
+  display: inline;
+}
+.sms .meta {
+  float: right;
+  font-style: italic;
+  color: #666;
+  margin: .3em 0 0 1em;
+  font-size: .9em;
+}
+.sms .date {
+  font-weight: bold;
+}
+.sms_list .empty {
+  text-align: center;
+  font-style: italic;
+}
+.sms_list .empty:not(:first-child:last-child) {
+  display: none;
+}
+.clear {
+  clear: both;
+}
+[data-highlight=True] {
+  background-color: #ffa;
+}
+
+
+footer {
+  margin: 2em 0;
+  line-height: 2rem;
+}
+footer, footer a, footer a:visited, footer a:link {
+  color: #666;
+}
+footer ul li {
+  list-style-type: none;
+  white-space: nowrap;
+}
+footer ul li a:before {
+  content: '';
+  width: .9em;
+  height: .9em;
+  display: inline-block;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: .9em;
+  margin-right: .2em;
+  background-color: #666;
+  mask-position: center center;
+  -webkit-mask-position: center center;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  vertical-align: middle;
+}
+.help:before {
+  mask-image: url('/static/help.svg');
+  -webkit-mask-image: url('/static/help.svg');
+}
+.numbers:before {
+  mask-image: url('/static/phone.svg');
+  -webkit-mask-image: url('/static/phone.svg');
+}
+.notify:before {
+  mask-image: url('/static/notify-enable.svg');
+  -webkit-mask-image: url('/static/notify-enable.svg');
+}
+[data-status=default].notify:before {
+  mask-image: url('/static/notify-default.svg');
+  -webkit-mask-image: url('/static/notify-default.svg');
+}
+[data-status=granted].notify:before {
+  mask-image: url('/static/notify-granted.svg');
+  -webkit-mask-image: url('/static/notify-granted.svg');
+}
+[data-status=denied].notify:before {
+  mask-image: url('/static/notify-denied.svg');
+  -webkit-mask-image: url('/static/notify-denied.svg');
+}
+.newer:before {
+  mask-image: url('/static/left.svg');
+  -webkit-mask-image: url('/static/left.svg');
+}
+.older:before {
+  mask-image: url('/static/right.svg');
+  -webkit-mask-image: url('/static/right.svg');
+}
+.logout:before {
+  mask-image: url('/static/logout.svg');
+  -webkit-mask-image: url('/static/logout.svg');
+}
+@media screen and (min-width: 54rem) {
+  footer ul li {
+    display: inline-block;
+    margin-left: .3em;
+  }
+  footer {
+    text-align: right;
+  }  
+}
+.logout {
+  white-space: nowrap;
+  line-height: 1.5rem;
+}
+.logout img {
+  margin: 0 .1em 0 .4em;
+  height: 1.6em;
+  vertical-align: middle;
+}
