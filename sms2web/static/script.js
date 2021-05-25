@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(update_list, 3000)
   }
   if ("Notification" in window) {
-    document.querySelector('.notify a').addEventListener('click', () => {
+    document.querySelector('a.notify').addEventListener('click', () => {
       Notification.requestPermission().then(set_notification_status)
     })
   }
