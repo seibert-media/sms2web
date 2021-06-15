@@ -8,10 +8,10 @@ Develop
 
 ```bash
 export OAUTH2_BASE_URI=http://localhost:5000
-export OAUTH2_CLIENT_ID=49012788941-rcbn217mav73ssgstma94j0gflcc13ku.apps.googleusercontent.com
-export OAUTH2_CLIENT_SECRET= # https://console.developers.google.com/apis/credentials/oauthclient/49012788941-rcbn217mav73ssgstma94j0gflcc13ku.apps.googleusercontent.com?project=49012788941
+export OAUTH2_CLIENT_ID=
+export OAUTH2_CLIENT_SECRET=
 export OAUTH2_HOSTED_DOMAIN=seibert-media.net
-export HELP_URL="https://confluence.apps.seibert-media.net/x/GkLODQ"
+export HELP_URL="help.example.com"
 export NUMBERS='+49 123 456 789'
 export FLASK_ENV=development
 export FLASK_DEBUG=True
