@@ -36,12 +36,12 @@ def home():
     layout = request.args.get('layout') != 'false'
     sms_list = select(
         '''
-    		SELECT * FROM sms
+            SELECT * FROM sms
             WHERE timestamp > :timestamp
             ORDER BY timestamp DESC
             LIMIT :limit
             OFFSET :offset
-    	''',
+        ''',
         timestamp=since,
         offset=offset,
         limit=per_page,
@@ -64,19 +64,19 @@ def home():
 @app.route('/sms77', methods=['POST'])
 def sms77():
     # {"webhook_event":"sms_mo","webhook_timestamp":"2021-05-04T13:15:12+02:00","data":{"id":800342,"sender":"491702607871","time":1620126912,"text":"Test","system":"4915735990598"}}
-	sms_data = request.get_json()['data']
-	insert(
+    sms_data = request.get_json()['data']
+    insert(
         '''
-    		INSERT INTO sms (sender, message, timestamp)
+            INSERT INTO sms (sender, message, timestamp)
             VALUES (:sender, :message, :timestamp)
-	    ''',
+        ''',
         sender=sms_data['sender'],
         message=sms_data['text'],
         timestamp=sms_data['time']
     )
     
-	return 'THX!'
+    return 'THX!'
 
 
 if __name__ =='__main__':
-   	app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0')
