@@ -16,6 +16,7 @@ export NUMBERS='+49 123 456 789'
 export FLASK_ENV=development
 export FLASK_DEBUG=True
 export OAUTHLIB_INSECURE_TRANSPORT=1
+export SMS2WEB_POST_RECEIVE_HOOK_PATH="./test_hook.sh"
 python3 sms2web/__init__.py
 ```
 

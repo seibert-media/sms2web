@@ -7,6 +7,7 @@ from os.path import dirname, realpath, join, exists
 from flask import Flask, render_template, request, redirect, session
 from datetime import datetime, timezone, timedelta
 from time import time
+from subprocess import check_output
 
 sys.path.insert(0, realpath(join(getcwd(), dirname(__file__))))
 
@@ -79,6 +80,10 @@ def sms77():
         timestamp=sms_data['time'],
         received_at=int(time())
     )
+
+    post_receive_hook_path = environ.get('SMS2WEB_POST_RECEIVE_HOOK_PATH', None)
+    if post_receive_hook_path:
+        print('HOOK OUTPUT:', check_output(post_receive_hook_path), file=sys.stderr)
 
     return 'THX!'
 
