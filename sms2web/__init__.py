@@ -71,6 +71,7 @@ def home():
 def sms77():
     # {"webhook_event":"sms_mo","webhook_timestamp":"2021-05-04T13:15:12+02:00","data":{"id":800342,"sender":"491702607871","time":1620126912,"text":"Test","system":"4915735990598"}}
     sms_data = request.get_json()['data']
+    sms_data['received_at'] = int(time())
     insert(
         '''
             INSERT INTO sms (sender, message, timestamp, received_at)
@@ -79,7 +80,7 @@ def sms77():
         sender=sms_data['sender'],
         message=sms_data['text'],
         timestamp=sms_data['time'],
-        received_at=int(time())
+        received_at=sms_data['received_at']
     )
 
     post_receive_hook_path = environ.get('SMS2WEB_POST_RECEIVE_HOOK_PATH', None)
