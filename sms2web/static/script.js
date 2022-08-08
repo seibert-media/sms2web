@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   set_notification_status()
   update_times()
   if ((new URLSearchParams(window.location.search).get('page') || '0') === '0') {
-    setInterval(update_list, 3000)
+    setInterval(update_list, 2000)
   }
   if ("Notification" in window) {
     document.querySelector('a.notify').addEventListener('click', () => {
