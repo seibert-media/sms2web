@@ -21,6 +21,9 @@ app.config.update(
     SEND_FILE_MAX_AGE_DEFAULT=300,
 )
 app.register_blueprint(google_auth.app)
+
+@app.before_first_request
+def before_first_request():
 init_db()
 
 
