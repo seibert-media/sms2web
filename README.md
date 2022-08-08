@@ -21,6 +21,8 @@ python3 sms2web/__init__.py
 
 Simulate sms77 callback:
 
+(On macos use gpaste from `brew install coreutils`)
+
 ```bash
 shuf -er -n$(( $RANDOM % 160 ))  {A..Z} {a..z} {0..9} ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' | paste -sd "" | read TEXT && curl -X POST http://localhost:5000/sms77 --data '{"webhook_event":"sms_mo","webhook_timestamp":"2021-05-04T13:15:12+02:00","data":{"id":800342,"sender":"491702607871","time":'$(date +%s)',"text":"'"$TEXT"'","system":"4915735990598"}}' -H "Content-Type: application/json"
 ```
