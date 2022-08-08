@@ -20,7 +20,7 @@
         <li class=sms data-id="{{ sms['id'] }}" title="sender: {{ sms['sender'] }}">
           <div class=message>{{ sms['message'] }}</div>
           <div class=meta>
-            <span class=date data-timestamp="{{ sms['timestamp'] }}">
+            <span class=date data-timestamp="{{ sms['timestamp'] }}" title="in transit for {{ sms['received_at'] - sms['timestamp'] }} seconds">
               {{ datetime.utcfromtimestamp(sms['timestamp']).strftime('%Y-%m-%d %H:%M:%S %Z') }}
             </span>
             ago
