@@ -71,6 +71,7 @@ def home():
 def sms77():
     # {"webhook_event":"sms_mo","webhook_timestamp":"2021-05-04T13:15:12+02:00","data":{"id":800342,"sender":"491702607871","time":1620126912,"text":"Test","system":"4915735990598"}}
     sms_data = request.get_json()['data']
+    sms_data['timestamp'] = int(sms_data['timestamp'])
     sms_data['received_at'] = int(time())
     insert(
         '''
@@ -85,6 +86,7 @@ def sms77():
 
     post_receive_hook_path = environ.get('SMS2WEB_POST_RECEIVE_HOOK_PATH', None)
     if post_receive_hook_path:
+        print('CALLLING HOOK...', json.dumps(sms_data))
         try:
             print('HOOK OUTPUT:', check_output([post_receive_hook_path, json.dumps(sms_data)]), file=sys.stderr)
         except CalledProcessError as e:
