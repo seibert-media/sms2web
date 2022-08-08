@@ -1,1 +1,3 @@
 sms2web/sms2web.db
+.venv
+*.pyc
