@@ -40,11 +40,16 @@ def init_db():
             CREATE TABLE sms (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 message TEXT NOT NULL,
-                timestamp INTEGER NOT NULL,
+                timestamp INTEGER NOT NULL, -- the time sent by the provider
+                received_at INTEGER NULL, -- the time the message was received by sms2web
                 sender INTEGER NOT NULL
             )
         ''')
         _query('''
             CREATE INDEX index_sms_on_timestamp
             ON sms (timestamp)
+        ''')
+        _query('''
+            CREATE INDEX index_sms_on_received_at
+            ON sms (received_at)
         ''')

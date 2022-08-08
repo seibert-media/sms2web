@@ -6,6 +6,7 @@ from os import environ, getcwd
 from os.path import dirname, realpath, join, exists
 from flask import Flask, render_template, request, redirect, session
 from datetime import datetime, timezone, timedelta
+from time import time
 
 sys.path.insert(0, realpath(join(getcwd(), dirname(__file__))))
 
@@ -24,7 +25,7 @@ app.register_blueprint(google_auth.app)
 
 @app.before_first_request
 def before_first_request():
-init_db()
+    init_db()
 
 
 @app.route('/', methods = ['GET'])
@@ -70,14 +71,15 @@ def sms77():
     sms_data = request.get_json()['data']
     insert(
         '''
-            INSERT INTO sms (sender, message, timestamp)
-            VALUES (:sender, :message, :timestamp)
+            INSERT INTO sms (sender, message, timestamp, received_at)
+            VALUES (:sender, :message, :timestamp, :received_at)
         ''',
         sender=sms_data['sender'],
         message=sms_data['text'],
-        timestamp=sms_data['time']
+        timestamp=sms_data['time'],
+        received_at=int(time())
     )
-    
+
     return 'THX!'
 
 
