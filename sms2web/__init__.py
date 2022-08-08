@@ -81,10 +81,7 @@ def sms77():
             INSERT INTO sms (sender, message, timestamp, received_at)
             VALUES (:sender, :message, :timestamp, :received_at)
         ''',
-        sender=sms['sender'],
-        message=sms['message'],
-        timestamp=sms['timestamp'],
-        received_at=sms['received_at']
+        **sms,
     )
 
     post_receive_hook_path = environ.get('SMS2WEB_POST_RECEIVE_HOOK_PATH', None)
