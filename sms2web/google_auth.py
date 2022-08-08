@@ -6,7 +6,7 @@ import os
 
 import flask
 
-from authlib.client import OAuth2Session
+from authlib.integrations.requests_client import OAuth2Session
 import google.oauth2.credentials
 import requests
 import googleapiclient.discovery
@@ -35,7 +35,7 @@ def required(function):
                 return flask.redirect(flask.url_for('google_auth.logout'))
         else:
             return flask.redirect(flask.url_for('google_auth.login'))
-    
+
     return decorated_function
 
 def is_logged_in():
@@ -46,7 +46,7 @@ def build_credentials():
         raise Exception('User must be logged in')
 
     oauth2_tokens = flask.session[AUTH_TOKEN_KEY]
-    
+
     return google.oauth2.credentials.Credentials(
                 oauth2_tokens['access_token'],
                 refresh_token=oauth2_tokens['refresh_token'],
@@ -80,7 +80,7 @@ def login():
     session = OAuth2Session(CLIENT_ID, CLIENT_SECRET,
                             scope=AUTHORIZATION_SCOPE,
                             redirect_uri=AUTH_REDIRECT_URI)
-  
+
     uri, state = session.create_authorization_url(AUTHORIZATION_URL)
 
     flask.session[AUTH_STATE_KEY] = state
@@ -96,14 +96,14 @@ def google_auth_redirect():
     if req_state != flask.session[AUTH_STATE_KEY]:
         response = flask.make_response('Invalid state parameter', 401)
         return response
-    
+
     session = OAuth2Session(CLIENT_ID, CLIENT_SECRET,
                             scope=AUTHORIZATION_SCOPE,
                             state=flask.session[AUTH_STATE_KEY],
                             redirect_uri=AUTH_REDIRECT_URI)
 
     oauth2_tokens = session.fetch_access_token(
-                        ACCESS_TOKEN_URI,            
+                        ACCESS_TOKEN_URI,
                         authorization_response=flask.request.url)
 
     flask.session[AUTH_TOKEN_KEY] = oauth2_tokens
@@ -121,7 +121,7 @@ def logout():
             params={"token": token},
             headers={"Content-Type": "application/x-www-form-urlencoded"}
         )
-    
+
     flask.session.pop(AUTH_TOKEN_KEY, None)
     flask.session.pop(AUTH_STATE_KEY, None)
     flask.session.pop(AUTH_USER_KEY, None)
