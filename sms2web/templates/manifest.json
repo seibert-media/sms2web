@@ -1,0 +1,41 @@
+{
+    "name": "SMS2WEB",
+    "short_name": "SMS2WEB",
+    "lang": "en-US",
+    "start_url": "/",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#e0e0e0",
+    "icons": [
+        {
+            "src": "{{ url_for("static", filename="icon-small-bg.png") }}",
+            "sizes": "128x128",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "{{ url_for("static", filename="icon-bg.png") }}",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "{{ url_for("static", filename="icon-small.png") }}",
+            "sizes": "128x128",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "{{ url_for("static", filename="icon.png") }}",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "{{ url_for("static", filename="icon.svg") }}",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "maskable"
+        }
+    ]
+}

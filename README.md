@@ -7,7 +7,7 @@ Develop
 -------
 
 ```bash
-export OAUTH2_BASE_URI=http://localhost:5000
+export OAUTH2_BASE_URI=http://localhost:4000
 export OAUTH2_CLIENT_ID=
 export OAUTH2_CLIENT_SECRET=
 export OAUTH2_HOSTED_DOMAIN=seibert-media.net

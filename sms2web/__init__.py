@@ -3,9 +3,9 @@
 import sys
 from math import floor
 from os import environ, getcwd
-from os.path import dirname, realpath, join, exists
-from flask import Flask, render_template, request, redirect, session
-from datetime import datetime, timezone, timedelta
+from os.path import dirname, realpath, join
+from flask import Flask, render_template, request, session, Response
+from datetime import datetime
 from time import time
 from subprocess import check_output, CalledProcessError
 import json
@@ -93,6 +93,13 @@ def sms77():
             print('HOOK ERROR:', e.output, file=sys.stderr)
 
     return 'THX!'
+
+
+@app.route('/manifest.json')
+def manifest():
+    response = Response(render_template("manifest.json"))
+    response.headers['Content-Type'] = 'application/json'
+    return response
 
 
 if __name__ =='__main__':
