@@ -121,8 +121,8 @@ footer ul li a:before {
   -webkit-mask-image: url('/static/phone.svg');
 }
 .notify:before {
-  mask-image: url('/static/notify-enable.svg');
-  -webkit-mask-image: url('/static/notify-enable.svg');
+  mask-image: url('/static/notify-default.svg');
+  -webkit-mask-image: url('/static/notify-default.svg');
 }
 [data-status=default].notify:before {
   mask-image: url('/static/notify-default.svg');
@@ -155,7 +155,7 @@ footer ul li a:before {
   }
   footer {
     text-align: right;
-  }  
+  }
 }
 .logout {
   white-space: nowrap;

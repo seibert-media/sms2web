@@ -1,15 +1,24 @@
-document.addEventListener('DOMContentLoaded', () => {
-  set_notification_status()
+if(document.readyState !== 'loading') {
+  init()
+} else {
+  document.addEventListener('DOMContentLoaded', function () {
+    init()
+  })
+}
+
+function init() {
+  console.log('init')
   update_times()
   if ((new URLSearchParams(window.location.search).get('page') || '0') === '0') {
     setInterval(update_list, 2000)
   }
   if ("Notification" in window) {
+    set_notification_status()
     document.querySelector('a.notify').addEventListener('click', () => {
       Notification.requestPermission().then(set_notification_status)
     })
   }
-})
+}
 
 function update_list() {
   var newest_sms = document.querySelector('.sms')
