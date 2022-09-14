@@ -112,39 +112,39 @@ footer ul li a:before {
   -webkit-mask-repeat: no-repeat;
   vertical-align: middle;
 }
-.help:before {
+footer li.help a:before {
   mask-image: url('/static/help.svg');
   -webkit-mask-image: url('/static/help.svg');
 }
-.numbers:before {
+footer li.numbers a:before {
   mask-image: url('/static/phone.svg');
   -webkit-mask-image: url('/static/phone.svg');
 }
-.notify:before {
+footer li.notify a:before {
   mask-image: url('/static/notify-default.svg');
   -webkit-mask-image: url('/static/notify-default.svg');
 }
-[data-status=default].notify:before {
+footer li.notify a[data-status=default]:before {
   mask-image: url('/static/notify-default.svg');
   -webkit-mask-image: url('/static/notify-default.svg');
 }
-[data-status=granted].notify:before {
+footer li.notify a[data-status=granted]:before {
   mask-image: url('/static/notify-granted.svg');
   -webkit-mask-image: url('/static/notify-granted.svg');
 }
-[data-status=denied].notify:before {
+footer li.notify a[data-status=denied]:before {
   mask-image: url('/static/notify-denied.svg');
   -webkit-mask-image: url('/static/notify-denied.svg');
 }
-.newer:before {
+footer li.newer a:before {
   mask-image: url('/static/left.svg');
   -webkit-mask-image: url('/static/left.svg');
 }
-.older:before {
+footer li.older a:before {
   mask-image: url('/static/right.svg');
   -webkit-mask-image: url('/static/right.svg');
 }
-.logout:before {
+footer li.logout a:before {
   mask-image: url('/static/logout.svg');
   -webkit-mask-image: url('/static/logout.svg');
 }
@@ -165,4 +165,7 @@ footer ul li a:before {
   margin: 0 .1em 0 .4em;
   height: 1.6em;
   vertical-align: middle;
+}
+.hidden {
+  display: none;
 }

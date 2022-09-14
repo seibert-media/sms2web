@@ -14,7 +14,7 @@ function init() {
   }
   if ("Notification" in window) {
     set_notification_status()
-    document.querySelector('a.notify').addEventListener('click', () => {
+    document.querySelector('.notify a').addEventListener('click', () => {
       Notification.requestPermission().then(set_notification_status)
     })
   }
@@ -91,5 +91,6 @@ function notifyMe(message) {
 }
 
 function set_notification_status() {
-  document.querySelector('.notify').setAttribute('data-status', Notification.permission)
+  document.querySelector('.notify').classList.remove("hidden")
+  document.querySelector('.notify a').setAttribute('data-status', Notification.permission)
 }

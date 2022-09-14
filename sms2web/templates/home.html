@@ -35,20 +35,20 @@
     </main>
     <footer>
       <ul>
-        <li><a class=notify href="#">notify</a></li>
+        <li class="notify hidden"><a href="#">notify</a></li>
 {% if help_url -%}
-        <li><a class=help href="{{ help_url }}" target="_blank">help</a></li>
+        <li class=help><a href="{{ help_url }}" target="_blank">help</a></li>
 {% endif -%}
 {% if numbers -%}
-        <li><a class=numbers href="tel:{{ numbers.split(',')[0].replace(' ', '') }}" title="{{ ', '.join(numbers.split(',')) }}">{{ numbers.split(',')[0] }}</a></li>
+        <li class=numbers><a href="tel:{{ numbers.split(',')[0].replace(' ', '') }}" title="{{ ', '.join(numbers.split(',')) }}">{{ numbers.split(',')[0] }}</a></li>
 {% endif -%}
 {% if page > 0 %}
-        <li><a class=newer href="{{ url_for('home', page=page-1, per_page=per_page) }}">newer</a></li>
+        <li class=newer><a href="{{ url_for('home', page=page-1, per_page=per_page) }}">newer</a></li>
 {% endif %}
 {% if page < last_page %}
-        <li><a class=older href="{{ url_for('home', page=page+1, per_page=per_page) }}">older</a></li>
+        <li class=older><a href="{{ url_for('home', page=page+1, per_page=per_page) }}">older</a></li>
 {% endif %}
-        <li><a class=logout href="{{ url_for('google_auth.logout') }}">logout {{ user['name'] }}<img class=avatar src="{{ user['picture'] }}"></a></li>
+        <li class=logout><a href="{{ url_for('google_auth.logout') }}">logout {{ user['name'] }}<img class=avatar src="{{ user['picture'] }}"></a></li>
       </ul>
     </footer>
   </body>
