@@ -11,6 +11,7 @@ export OAUTH2_BASE_URI=http://localhost:4000
 export OAUTH2_CLIENT_ID=
 export OAUTH2_CLIENT_SECRET=
 export OAUTH2_HOSTED_DOMAIN=seibert-media.net
+export OAUTH2_ALLOWED_DOMAINS=seibert-media.net,foo.com
 export HELP_URL="help.example.com"
 export NUMBERS='+49 123 456 789'
 export FLASK_DEBUG=True

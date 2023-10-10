@@ -12,6 +12,7 @@ import requests
 import googleapiclient.discovery
 
 HOSTED_DOMAIN = os.environ.get("OAUTH2_HOSTED_DOMAIN", default=False)
+ALLOWED_DOMAINS = os.environ.get("OAUTH2_ALLOWED_DOMAINS").split(',')
 ACCESS_TOKEN_URI = 'https://www.googleapis.com/oauth2/v4/token'
 AUTHORIZATION_URL = f'https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&prompt=consent&hd={HOSTED_DOMAIN}'
 AUTHORIZATION_SCOPE ='openid email profile'
@@ -29,7 +30,7 @@ def required(function):
     @wraps(function)
     def decorated_function(*args, **kwargs):
         if is_logged_in():
-            if flask.session.get(AUTH_USER_KEY, {}).get('hd') == HOSTED_DOMAIN:
+            if flask.session.get(AUTH_USER_KEY, {}).get('hd') in ALLOWED_DOMAINS:
                 return function(*args, **kwargs)
             else:
                 return flask.redirect(flask.url_for('google_auth.logout'))
