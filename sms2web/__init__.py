@@ -25,8 +25,7 @@ app.config.update(
 )
 app.register_blueprint(google_auth.app)
 
-@app.before_first_request
-def before_first_request():
+with app.app_context():
     init_db()
 
 
