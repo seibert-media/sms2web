@@ -12,6 +12,7 @@ export OAUTH2_CLIENT_ID=
 export OAUTH2_CLIENT_SECRET=
 export OAUTH2_HOSTED_DOMAIN=seibert-media.net
 export OAUTH2_ALLOWED_DOMAINS=seibert-media.net,foo.com
+export ALLOWLIST_URL="https://my.wiki/sms2web/restricted_to"
 export HELP_URL="help.example.com"
 export NUMBERS='+49 123 456 789'
 export FLASK_DEBUG=True

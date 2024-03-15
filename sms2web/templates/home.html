@@ -15,6 +15,11 @@
       <h1 class=logo><a href="{{ url_for('home') }}">SMS2WEB <img src="{{ url_for('static', filename='icon.svg') }}" alt="//SEIBERT/MEDIA"></a></h1>
     </header>
     <main>
+{% if allowlist_url %}
+      <p class=allowlist>
+        <a href="{{allowlist_url}}">Usage of this tool is restricted to certain services!</a>
+      </p>
+{% endif -%}
 {% endif -%}
       <ul class=sms_list>
         <li class=empty>nothing to see here</li>
