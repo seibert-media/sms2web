@@ -169,3 +169,11 @@ footer li.logout a:before {
 .hidden {
   display: none;
 }
+
+p.allowlist {
+  padding: 1em;
+  border: 1px solid #992424;
+  border-radius: .4em;
+  background-color: #e0cece;
+  box-shadow: 0 .2em .2em rgba(0,0,0,.1)
+}

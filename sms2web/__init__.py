@@ -59,6 +59,7 @@ def home():
         per_page=per_page,
         last_page=last_page,
         datetime=datetime,
+        allowlist_url=environ.get("ALLOWLIST_URL", default=False),
         help_url=environ.get("HELP_URL", default=False),
         numbers=environ.get("NUMBERS", default=False),
         user=session['google_user'],
