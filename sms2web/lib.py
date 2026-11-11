@@ -1,6 +1,5 @@
 from os import environ, getcwd
-from os.path import dirname, realpath, join, exists
-from contextlib import closing
+from os.path import dirname, realpath, join
 import sqlite3
 
 DATA_PATH = environ.get('DATA_PATH') or realpath(join(getcwd(), dirname(__file__)))
@@ -13,6 +12,10 @@ def select(query, **params):
 
 def insert(query, **params):
     return _query(query, **params).lastrowid
+
+
+def delete(query, **params):
+    return _query(query, **params).rowcount
 
 
 def _query(query, **params):
@@ -35,21 +38,30 @@ def dict_factory(cursor, row):
 
 
 def init_db():
-    if not exists(DB_PATH):
-        _query('''
-            CREATE TABLE sms (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                message TEXT NOT NULL,
-                timestamp INTEGER NOT NULL, -- the time sent by the provider
-                received_at INTEGER NULL, -- the time the message was received by sms2web
-                sender INTEGER NOT NULL
-            )
-        ''')
-        _query('''
-            CREATE INDEX index_sms_on_timestamp
-            ON sms (timestamp)
-        ''')
-        _query('''
-            CREATE INDEX index_sms_on_received_at
-            ON sms (received_at)
-        ''')
+    _query('''
+        CREATE TABLE IF NOT EXISTS sms (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            message TEXT NOT NULL,
+            timestamp INTEGER NOT NULL, -- the time sent by the provider
+            received_at INTEGER NULL, -- the time the message was received by sms2web
+            sender INTEGER NOT NULL
+        )
+    ''')
+    _query('''
+        CREATE INDEX IF NOT EXISTS index_sms_on_timestamp
+        ON sms (timestamp)
+    ''')
+    _query('''
+        CREATE INDEX IF NOT EXISTS index_sms_on_received_at
+        ON sms (received_at)
+    ''')
+    _query('''
+        CREATE TABLE IF NOT EXISTS sms77_nonce (
+            nonce TEXT PRIMARY KEY,
+            expires INTEGER NOT NULL
+        )
+    ''')
+    _query('''
+        CREATE INDEX IF NOT EXISTS index_sms77_nonce_on_expires
+        ON sms77_nonce (expires)
+    ''')
