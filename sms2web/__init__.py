@@ -14,6 +14,7 @@ sys.path.insert(0, realpath(join(getcwd(), dirname(__file__))))
 
 import google_auth
 from lib import init_db, select, insert
+from sms77_signature import verify as verify_sms77_signature
 
 app = Flask(__name__)
 app.secret_key = environ.get("FLASK_SECRET_KEY", default='test')
@@ -27,6 +28,13 @@ app.register_blueprint(google_auth.app)
 
 with app.app_context():
     init_db()
+
+if not environ.get('SMS77_SIGNING_SECRET'):
+    print(
+        'WARNING: SMS77_SIGNING_SECRET is not set, '
+        'incoming sms77 webhooks will be rejected',
+        file=sys.stderr,
+    )
 
 
 @app.route('/', methods = ['GET'])
@@ -69,13 +77,32 @@ def home():
 
 @app.route('/sms77', methods=['POST'])
 def sms77():
+    if not environ.get('SMS77_SIGNING_SECRET'):
+        print(
+            'SMS77 WEBHOOK REJECTED: SMS77_SIGNING_SECRET is not configured',
+            file=sys.stderr,
+        )
+        return 'NOT CONFIGURED', 503
+
+    ok, reason = verify_sms77_signature(request)
+    if not ok:
+        print('SMS77 WEBHOOK REJECTED:', reason, file=sys.stderr)
+        return 'FORBIDDEN', 403
+
     # {"webhook_event":"sms_mo","webhook_timestamp":"2021-05-04T13:15:12+02:00","data":{"id":800342,"sender":"491702607871","time":1620126912,"text":"Test","system":"4915735990598"}}
-    sms = {
-        'sender': request.get_json()['data']['sender'],
-        'message': request.get_json()['data']['text'],
-        'timestamp': int(request.get_json()['data']['time']),
-        'received_at': int(time()),
-    }
+    payload = request.get_json(silent=True)
+    try:
+        data = payload['data']
+        sms = {
+            'sender': data['sender'],
+            'message': data['text'],
+            'timestamp': int(data['time']),
+            'received_at': int(time()),
+        }
+    except (KeyError, TypeError, ValueError) as e:
+        print('SMS77 WEBHOOK REJECTED: malformed payload:', repr(e), file=sys.stderr)
+        return 'BAD REQUEST', 400
+
     insert(
         '''
             INSERT INTO sms (sender, message, timestamp, received_at)
